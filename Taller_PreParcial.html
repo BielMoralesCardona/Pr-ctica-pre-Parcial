@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Biel Morales Cardona">
+
+<title>Taller evaluado de repaso para el Primer Parcial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Taller_PreParcial_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Taller_PreParcial_files/libs/quarto-html/quarto.js"></script>
+<script src="Taller_PreParcial_files/libs/quarto-html/popper.min.js"></script>
+<script src="Taller_PreParcial_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Taller_PreParcial_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Taller_PreParcial_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Taller_PreParcial_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Taller_PreParcial_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Taller_PreParcial_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Taller_PreParcial_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#objetivos-del-trabajo." id="toc-objetivos-del-trabajo." class="nav-link active" data-scroll-target="#objetivos-del-trabajo.">1. Objetivos del trabajo.</a></li>
+  <li><a href="#definición-de-variables." id="toc-definición-de-variables." class="nav-link" data-scroll-target="#definición-de-variables.">2. Definición de variables.</a></li>
+  <li><a href="#análisis-descriptivo-multivariantes" id="toc-análisis-descriptivo-multivariantes" class="nav-link" data-scroll-target="#análisis-descriptivo-multivariantes">3. Análisis descriptivo multivariantes</a></li>
+  <li><a href="#modelo-multivariante" id="toc-modelo-multivariante" class="nav-link" data-scroll-target="#modelo-multivariante">4. Modelo multivariante</a></li>
+  <li><a href="#regresión-lineal-multivariante" id="toc-regresión-lineal-multivariante" class="nav-link" data-scroll-target="#regresión-lineal-multivariante">5. Regresión lineal multivariante</a></li>
+  <li><a href="#contraste-de-dos-medias-multivariante" id="toc-contraste-de-dos-medias-multivariante" class="nav-link" data-scroll-target="#contraste-de-dos-medias-multivariante">6. Contraste de dos medias multivariante</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Taller evaluado de repaso para el Primer Parcial</h1>
+<p class="subtitle lead">20582- Análisis de Datos para el GMAT</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Biel Morales Cardona </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>En este taller, aplicaremos los pasos del método científico para abordar, con datos simulados, una problemática relacionada con el tema elegido (cine). Presentaremos un informe del proyecto siguiendo la estructura detallada en el documento “Recomendaciones para escribir informes de proyectos en Estadística,” que se encuentra en la sección “Práctica” de la página del curso en Aula Digital.</p>
+<section id="objetivos-del-trabajo." class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-del-trabajo.">1. Objetivos del trabajo.</h3>
+<p>El tema elegido para hacer el trabajo será la valoración, por temporadas, de una serie de televisión. Crearemos un dataframe (desde cero) que incluya las valoraciones de cada temporada (4 temporadas) junto con alguna variable de identificación que nos permita clasificar a cada uno de los votantes. Estas variables de identificación van a ser: edad, horas semanales consumiendo cine (ordinales) y sexo e idioma en el que se ha visto la serie (nominales).</p>
+<p>A partir de aquí, se quiere estudiar cual ha sido la evolución de la serie a lo largo de las temporadas y si alguna de ellas ha gustado más a ciertas partes de la población. Para eso presentamos los siguientes objetivos:</p>
+<ul>
+<li>Comprovar si se las valoraciones de cada temporada cambian y alguna de ellas ha tenido mayor (o menor) éxito.</li>
+<li>Comprovar si las valoraciones de alguna temporada presenta diferencias entre la población de diferente sexo o edad.</li>
+<li>Comprovar si las horas semanales que un individuo dedica al cine tiene alguna relación con la valoración de alguna temporada.</li>
+</ul>
+</section>
+<section id="definición-de-variables." class="level3">
+<h3 class="anchored" data-anchor-id="definición-de-variables.">2. Definición de variables.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">300</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.9</span>, <span class="fl">7.1</span>, <span class="fl">6.2</span>, <span class="fl">5.2</span>)  <span class="co"># medias de t1, t2 t3, t4 (valoraciones de cada temporada)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>covarianza <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="fl">1.1</span>, <span class="fl">0.6</span>, <span class="sc">-</span><span class="dv">2</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       <span class="fl">1.1</span>, <span class="fl">2.8</span>, <span class="fl">0.3</span>, <span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                       <span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="dv">2</span>, <span class="fl">0.7</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                       <span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.7</span>, <span class="fl">3.2</span>), </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7318</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>datos_numericos <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(n, <span class="at">mu =</span> media, <span class="at">Sigma =</span> covarianza)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>idiomas <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"CAT"</span>,<span class="st">"ESP"</span>,<span class="st">"FRA"</span>,<span class="st">"ITA"</span>,<span class="st">"GER"</span>,<span class="st">"NED"</span>,<span class="st">"ENG"</span>,<span class="st">"NOR"</span>,<span class="st">"CRO"</span>,<span class="st">"FIN"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>cortesDedicacion <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"&lt;2"</span>, <span class="st">"2-4"</span>, <span class="st">"4-8"</span>, <span class="st">"8-10"</span>, <span class="st">"&gt;10"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla 1 con los datos (acotando y redondeando los numéricos)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">t1 =</span> <span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="fu">round</span>(datos_numericos[,<span class="dv">1</span>], <span class="dv">2</span>), <span class="dv">1</span>), <span class="dv">10</span>),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">t2 =</span> <span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="fu">round</span>(datos_numericos[,<span class="dv">2</span>], <span class="dv">2</span>), <span class="dv">1</span>), <span class="dv">10</span>),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">t3 =</span> <span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="fu">round</span>(datos_numericos[,<span class="dv">3</span>], <span class="dv">2</span>), <span class="dv">1</span>), <span class="dv">10</span>),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">t4 =</span> <span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="fu">round</span>(datos_numericos[,<span class="dv">4</span>], <span class="dv">2</span>), <span class="dv">1</span>), <span class="dv">10</span>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"F"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">edad =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">75</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">dedicacionCine =</span> <span class="fu">ordered</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">labels =</span> cortesDedicacion),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">idioma =</span> <span class="fu">ordered</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">labels =</span> idiomas)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>datos_numericos <span class="ot">&lt;-</span>reviews[,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="análisis-descriptivo-multivariantes" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-descriptivo-multivariantes">3. Análisis descriptivo multivariantes</h3>
+<p>Para entender un poco las variables con las que trabajamos, vamos a intentar resumirlas. Empezaremos con las variables cuantitativas, de las cuales describiremos su varianza generalizada y total:</p>
+<p>Calculando la matriz de covarianza mostral, podemos hacer su determinante para obtener la <em>varianza generalizada</em> de las variables cuantitativas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>S<span class="ot">=</span><span class="fu">cov</span>(datos_numericos)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(S)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6441003</code></pre>
+</div>
+</div>
+<p>Además, ahora también resulta facil obtener la varianza total como la traza de la matriz de covarianza mostral:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(S))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.24759</code></pre>
+</div>
+</div>
+<p>A continuación, para presentar las variables idioma y dedicación cine haremos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sang <span class="ot">&lt;-</span> reviews <span class="sc">%&gt;%</span> <span class="fu">select</span>(idioma,sexo)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> reviews) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_mosaic</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">product</span>(sexo, idioma), <span class="at">fill=</span>sexo)) <span class="sc">+</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Diagrama de Mosaico con clasificación por Sexo y por Idioma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `scale_name` argument of `continuous_scale()` is deprecated as of ggplot2
+3.5.0.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `trans` argument of `continuous_scale()` is deprecated as of ggplot2 3.5.0.
+i Please use the `transform` argument instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `unite_()` was deprecated in tidyr 1.2.0.
+i Please use `unite()` instead.
+i The deprecated feature was likely used in the ggmosaic package.
+  Please report the issue at &lt;https://github.com/haleyjeppson/ggmosaic&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Taller_PreParcial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Este diagrama emparejado nos permite analizar las dimensiones de cada grupo de clasificación para observar la calidad del muestreo de la población. Podemos destacar, por ejemplo, la escasez de participación de mujeres de habla catalana y alemana, comparaa con el resto de población que parece presentar ligeramente un mayor número de votantes de sexo femenino.</p>
+<p>Acontinuación, podemos intentar valorar si existe alguna correlación entre las valoraciones de cada temporada con la edad del votante.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, edad) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(.) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggcorrplot</span>(., <span class="at">hc.order =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"lower"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#6D9EC1"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"yellow"</span>, <span class="st">"#E46726"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Taller_PreParcial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Con este mapa de calor (y con su abundancia de amarillo), podemos ver que las muestras obtenidas no indican en ningún momento a una possible correlación con la edad; es decir que la opinión del votante de ninguna de las temporadas parece cambiar en función de su edad. En este gráfico tambien podemos ver que solo existe una correlación significativa entre las votaciones de las temporadas. Esta correlación negativa entre la Primera y Cuarta temporada nos indica la presencia de algun factor en tales temporadas que afecta a parte de la población. Esto podria darse, por ejemplo, por una diferencia en participación de algun personaje crítico o en el uso de un humor hacia cierto colectivo que guste o disguste a la población y cree estas diferencias aparentemente significativas en los votantes.</p>
+<p>En esta última prueba compararemos las medias de votaciones de cada votante (suponiendo que resumen la valoración global de la serie) para cada colectivo de dedicación al cine; esto nos permitiría comprobar si la serie presenta los típicos niveles de profundidad que solo los expertos son capaces de analizar y les hace valorar mejor o peor las obras de la gran pantalla.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reviews<span class="sc">$</span>valTotal <span class="ot">=</span> (reviews[,<span class="dv">1</span>]<span class="sc">+</span>reviews[,<span class="dv">2</span>]<span class="sc">+</span>reviews[,<span class="dv">3</span>]<span class="sc">+</span>reviews[,<span class="dv">4</span>])<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(reviews, <span class="fu">aes</span>(<span class="at">x=</span>dedicacionCine, <span class="at">y=</span>valTotal, <span class="at">fill=</span>dedicacionCine)) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Valoración global de la serie en función de la dedicación al Cine"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Taller_PreParcial_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Este diagrama de violín muestra las valoraciones medias de la serie en función de cada grupo de dedicación. Podemos ver que el único grupo que parece presentar alguna diferencia es el primero, cosa que indicaria que la serie pueda estar dirigida a un grupo menos experto en la materia.</p>
+</section>
+<section id="modelo-multivariante" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-multivariante">4. Modelo multivariante</h3>
+<p>A continuación, modelizaremos la variable <em>idioma</em> con una distribución multinomial. Para ello trataremos de estimar los parámetros de la multinomial (probabilidades de cada posible resultado que pueda tomar la variable) por sus estimadores de máxima verosimilitud; en el caso de trabajar con una distribución multinnomial, estos estimadores son las frecuencias de aparición que ha tenido cada posible valor. Teniendo la variable <em>idioma</em> 10 posibles valores, llamaremos a estos estimadores de máxima verosimilitud <span class="math inline">\(\hat{p_i}\)</span> para <span class="math inline">\(i\in\{0,1,\cdots,9}\)</span> y los guardaremos en un vector llamado <em>hatP</em>. De este modo los podemos calcular con r:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>hatP<span class="ot">=</span><span class="fu">table</span>(reviews<span class="sc">$</span>idioma)<span class="sc">/</span>n</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>hatP</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+       CAT        ESP        FRA        ITA        GER        NED        ENG 
+0.08333333 0.09333333 0.09666667 0.14000000 0.09000000 0.10000000 0.08333333 
+       NOR        CRO        FIN 
+0.09000000 0.12666667 0.09666667 </code></pre>
+</div>
+</div>
+<p>De este modo, tenemos las frecuencias de aparición de cada idioma y podemos decir que nuestro modelo de la variable <span class="math inline">\(X\)</span> ( <em>idioma</em> ) es siguiente: <span class="math display">\[X\sim Multinom(\text{hatP},n)\]</span> Este modelo nos permite intentar comprobar (caluclando explícitamente) cual seria la probabilidad de que ocurra un evento en concreto. Puesto que esta variable tenia el objetivo de determinar una característica en concreto del votante (variable de clasificación), seria adecuado que presentara una proporcion equilibrada de valores tomados; por esta razón, calcularemos a modo de ejemplo la probabilidad de que en una muestra de 20 votantes, aparezcan 2 que hayan visto la serie en cada uno de los idiomas posibles. Gracias a las herramientas de <em>r</em> podemos resumir esto en una simple función:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>resultado<span class="ot">=</span><span class="fu">rep</span>(<span class="dv">2</span>,<span class="dv">10</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dmultinom</span>(resultado,<span class="at">prob=</span>hatP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.798171e-05</code></pre>
+</div>
+</div>
+<p>Pese a haber construido la variable de modo que las probabilidades iniciales fueran iguales, los parámetros de frecuencia provienen de una muestra aleatoria y no se ajustan del todo a ser equiprobables. Es por esto que aunque querramos buscar el evento más probable de todos (teóricamente, en la práctica el más probable seria que se ajustaran a las frecuencias de la muestra obtenida en las votaciones), que coincidan a nuestro favor no es demasiado probable. Este evento, aunque tenga una probabilidad del orden de <span class="math inline">\(10^{-5}\)</span>, es relativamente probable si lo ponemos en el contexto de una muestra de tamaño 20 con 10 posibles valores para cada prueba.</p>
+</section>
+<section id="regresión-lineal-multivariante" class="level3">
+<h3 class="anchored" data-anchor-id="regresión-lineal-multivariante">5. Regresión lineal multivariante</h3>
+<p>En este apartado intentaremos ajustar un modelo de regresión lineal multivariante para expresar la votación de la cuarta temporada <span class="math inline">\(X_4\)</span> en función de la de los demás variables cuantitativas (<span class="math inline">\(X_i\)</span> voto de la temporada <span class="math inline">\(i\)</span>); es decir: <span class="math display">\[X_4 = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon\]</span></p>
+<p>Para lograr este objetivo debemos encontrar los parámetros de regresión <span class="math inline">\(\beta_i\)</span>. Este paso lo podemos hacer fácil mediante una función de <em>r</em> que nos emite los resultados:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(t4<span class="sc">~</span>t1<span class="sc">+</span>t2<span class="sc">+</span>t3,<span class="at">data=</span>datos_numericos))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = t4 ~ t1 + t2 + t3, data = datos_numericos)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.56611 -0.16320 -0.00313  0.12432  1.77612 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.787771   0.088852   31.38   &lt;2e-16 ***
+t1          -1.021040   0.009064 -112.65   &lt;2e-16 ***
+t2           0.710281   0.009598   74.00   &lt;2e-16 ***
+t3           0.552275   0.010406   53.07   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2424 on 296 degrees of freedom
+Multiple R-squared:  0.9808,    Adjusted R-squared:  0.9806 
+F-statistic:  5051 on 3 and 296 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>De este modo, podemos expresar la cuarta variable como: <span class="math display">\[X_4 = 2.79 - 1.02 X_1 + 0.71 X_2 + 0.55 X_3 + \epsilon\]</span> Donde, asumiendo que el error <span class="math inline">\(\epsilon\)</span> se rige por una lei normal de mediana cero, éste presenta un error estandar <span class="math inline">\(\sigma^2=0.2424\)</span>. Estos pasos nos permiten ir a calcular, a continuación la función de score del modelo.</p>
+<p>La función de <em>score</em> del modelo se calcula como la derivada de la función de verosimilitud aplicada sobre los valores obtenidos para los parámetros. En este caso, dado que la cuarta variable debería regirse por una lei normal (del hecho de formar parte de un vector normal multivariante), la función de verosimilitud de esta es la siguiente (siendo <span class="math inline">\(\beta=(\beta_0,\cdots,\beta_3)\)</span>:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{X},\beta,\sigma^2)=\prod_{i=1}^n f_i\left(x_i,\beta, \sigma^2\right) =
+\frac{\exp{\{-\sum_{i=1}^n \frac{x_i-\beta}{2\sigma^2}\}}}{\sigma\sqrt{2\pi}}\]</span> De este modo, derivándola en función de los parámetros <span class="math inline">\(\beta, \sigma^2\)</span></p>
+</section>
+<section id="contraste-de-dos-medias-multivariante" class="level3">
+<h3 class="anchored" data-anchor-id="contraste-de-dos-medias-multivariante">6. Contraste de dos medias multivariante</h3>
+<p>En este apartado intentaremos comparar las medias de dos grupos de la población. Para ello utilizaremos el contraste con la función <em>hotelling.test</em> de R y luego lo comprobaremos mediante el test teórico.</p>
+<p>Para hacer el caso teórico construiremos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hombres <span class="ot">&lt;-</span> reviews <span class="sc">%&gt;%</span> <span class="fu">subset</span>(sexo<span class="sc">==</span><span class="st">"H"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mujeres <span class="ot">&lt;-</span> reviews <span class="sc">%&gt;%</span> <span class="fu">subset</span>(sexo<span class="sc">==</span><span class="st">"F"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>medH <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(hombres)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>medF <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(mujeres)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>covH <span class="ot">&lt;-</span> <span class="fu">cov</span>(hombres)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>covF <span class="ot">&lt;-</span> <span class="fu">cov</span>(mujeres)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>nH <span class="ot">&lt;-</span> <span class="fu">dim</span>(hombres)[<span class="dv">1</span>]</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>nF <span class="ot">&lt;-</span> <span class="fu">dim</span>(mujeres)[<span class="dv">1</span>]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>covT <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n<span class="sc">*</span>(nH<span class="sc">*</span>covH<span class="sc">+</span>nF<span class="sc">*</span>covF) </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>inve <span class="ot">&lt;-</span> <span class="fu">solve</span>(covT)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>MahalanobisDist2 <span class="ot">&lt;-</span> (medH<span class="sc">-</span>medF)<span class="sc">%*%</span>inve<span class="sc">%*%</span>(medH<span class="sc">-</span>medF)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>estadisticoT2 <span class="ot">&lt;-</span> nH<span class="sc">*</span>nF<span class="sc">/</span>(nH<span class="sc">+</span>nF)<span class="sc">*</span>MahalanobisDist2</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>estadisticoF <span class="ot">&lt;-</span> (nH<span class="sc">+</span>nF<span class="dv">-1-4</span>)<span class="sc">/</span>(<span class="dv">4</span><span class="sc">*</span>(nH<span class="sc">+</span>nF<span class="dv">-1</span>))<span class="sc">*</span>estadisticoT2</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(estadisticoF,<span class="dv">4</span>,n<span class="dv">-4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] 0.9170061</code></pre>
+</div>
+</div>
+<p>Este test no ha salido como debería, ya que prefiero fiarme del resultado del test <em>hotelling</em> mediante <em>r</em> que nos dá el siguiente resultado:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">hotelling.test</span>(<span class="fu">cbind</span>(t1, t2, t3, t4) <span class="sc">~</span> sexo, <span class="at">data=</span>reviews))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test stat:  8.4442 
+Numerator df:  4 
+Denominator df:  295 
+P-value:  0.08215 </code></pre>
+</div>
+</div>
+<p>El resultado del test de hotelling es de p-valor mayor a 0.01 (que asumiremos como nuestro nivel de significancia) y, por lo tanto, no nos permite rechazar la hipótesis nula; es decir, no tenemos prueba de que existan diferencias entre las medias de votaciones de cada sexo. En el contexto del problema podemos interpretar que la serie no gusta más a algun sexo que a otro, cosa que podria descartar que aparezca contenido dirigido a algun sexo en concreto.</p>
+</section>
+<section id="conclusión" class="level3">
+<h3 class="anchored" data-anchor-id="conclusión">Conclusión</h3>
+<p>Este trabajo presenta pocas conclusiones ya que se fundamenta en datos totalmente simulados. Es por eso que sacaremos metaconclusiones sobre trabajar con simulaciones.</p>
+<p>Encontrar datos con estructuras cómodas es bastante complicado de manera natural; por lo que hecha esta práctica con simulaciones, hemos podido comprobar de manera más fiable los tests y jugar con datos que de verdad tengan cierta estructura.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

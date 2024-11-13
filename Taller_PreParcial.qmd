@@ -1,0 +1,215 @@
+---
+title: "Taller evaluado de repaso para el Primer Parcial"
+author: "Biel Morales Cardona"
+subtitle: "20582- Análisis de Datos para el GMAT"
+format:
+  html:
+    theme: lumen
+    toc: true
+    toc-depth: 3
+Rendering:
+    embed-resources: true
+---
+
+
+```{r, include=FALSE, echo=FALSE, warning=FALSE}
+library(MASS)
+library(tidyverse)
+library(ggplot2)
+library(ggmosaic)
+library(ggcorrplot)
+library(dplyr)
+library(Hotelling)
+```
+
+
+En este taller, aplicaremos los pasos del método científico para abordar, con datos simulados, una problemática relacionada con el tema elegido (cine). Presentaremos un informe del proyecto siguiendo la estructura detallada en el documento “Recomendaciones para escribir informes de proyectos en Estadística,” que se encuentra en la sección "Práctica" de la página del curso en Aula Digital.
+
+### 1. Objetivos del trabajo.
+
+El tema elegido para hacer el trabajo será la valoración, por temporadas, de una serie de televisión. Crearemos un dataframe (desde cero) que incluya las valoraciones de cada temporada (4 temporadas) junto con alguna variable de identificación que nos permita clasificar a cada uno de los votantes. Estas variables de identificación van a ser: edad, horas semanales consumiendo cine (ordinales) y sexo e idioma en el que se ha visto la serie (nominales).
+
+A partir de aquí, se quiere estudiar cual ha sido la evolución de la serie a lo largo de las temporadas y si alguna de ellas ha gustado más a ciertas partes de la población. Para eso presentamos los siguientes objetivos:
+
+- Comprovar si se las valoraciones de cada temporada cambian y alguna de ellas ha tenido mayor (o menor) éxito.
+- Comprovar si las valoraciones de alguna temporada presenta diferencias entre la población de diferente sexo o edad.
+- Comprovar si las horas semanales que un individuo dedica al cine tiene alguna relación con la valoración de alguna temporada.
+
+### 2. Definición de variables.
+
+```{r}
+n=300
+media <- c(5.9, 7.1, 6.2, 5.2)  # medias de t1, t2 t3, t4 (valoraciones de cada temporada)
+covarianza <- matrix(c(3, 1.1, 0.6, -2,
+                       1.1, 2.8, 0.3, 1,
+                       0.6, 0.3, 2, 0.7,
+                       -2, 2, 0.7, 3.2), 
+                     nrow = 4, ncol = 4)
+
+
+set.seed(7318)
+datos_numericos <- mvrnorm(n, mu = media, Sigma = covarianza)
+
+# Etiquetas:
+idiomas = c("CAT","ESP","FRA","ITA","GER","NED","ENG","NOR","CRO","FIN")
+cortesDedicacion = c("<2", "2-4", "4-8", "8-10", ">10")
+
+
+
+# Tabla 1 con los datos (acotando y redondeando los numéricos)
+reviews <- data.frame(
+  t1 = pmin(pmax(round(datos_numericos[,1], 2), 1), 10),
+  t2 = pmin(pmax(round(datos_numericos[,2], 2), 1), 10),
+  t3 = pmin(pmax(round(datos_numericos[,3], 2), 1), 10),
+  t4 = pmin(pmax(round(datos_numericos[,4], 2), 1), 10),
+  sexo = sample(c("H", "F"), n, replace = TRUE),
+  edad = sample(18:75, n, replace = TRUE),
+  dedicacionCine = ordered(sample(1:5, n, replace = TRUE), labels = cortesDedicacion),
+  idioma = ordered(sample(1:10, n, replace = TRUE), labels = idiomas)
+)
+datos_numericos <-reviews[,c(1:4)]
+```
+
+### 3. Análisis descriptivo multivariantes
+
+Para entender un poco las variables con las que trabajamos, vamos a intentar resumirlas. Empezaremos con las variables cuantitativas, de las cuales describiremos su varianza generalizada y total:
+
+Calculando la matriz de covarianza mostral, podemos hacer su determinante para obtener la *varianza generalizada* de las variables cuantitativas:
+
+```{r}
+S=cov(datos_numericos)
+det(S)
+```
+Además, ahora también resulta facil obtener la varianza total como la traza de la matriz de covarianza mostral:
+
+```{r}
+sum(diag(S))
+```
+A continuación, para presentar las variables idioma y dedicación cine haremos
+
+```{r}
+sang <- reviews %>% select(idioma,sexo)
+ggplot(data = reviews) +
+  geom_mosaic(aes(x = product(sexo, idioma), fill=sexo)) + 
+  labs(title="Diagrama de Mosaico con clasificación por Sexo y por Idioma")
+
+```
+
+Este diagrama emparejado nos permite analizar las dimensiones de cada grupo de clasificación para observar la calidad del muestreo de la población. Podemos destacar, por ejemplo, la escasez de participación de mujeres de habla catalana y alemana, comparaa con el resto de población que parece presentar ligeramente un mayor número de votantes de sexo femenino.
+
+Acontinuación, podemos intentar valorar si existe alguna correlación entre las valoraciones de cada temporada con la edad del votante.
+
+```{r}
+reviews %>%
+  select(1:4, edad) %>% 
+  cor(.) %>% 
+  ggcorrplot(., hc.order = FALSE,
+        type = "lower",
+        colors = c("#6D9EC1",
+                    "yellow", "#E46726"))
+```
+
+Con este mapa de calor (y con su abundancia de amarillo), podemos ver que las muestras obtenidas no indican en ningún momento a una possible correlación con la edad; es decir que la opinión del votante de ninguna de las temporadas parece cambiar en función de su edad.
+En este gráfico tambien podemos ver que solo existe una correlación significativa entre las votaciones de las temporadas. Esta correlación negativa entre la Primera y Cuarta temporada nos indica la presencia de algun factor en tales temporadas que afecta a parte de la población. Esto podria darse, por ejemplo, por una diferencia en participación de algun personaje crítico o en el uso de un humor hacia cierto colectivo que guste o disguste a la población y cree estas diferencias aparentemente significativas en los votantes.
+
+
+
+En esta última prueba compararemos las medias de votaciones de cada votante (suponiendo que resumen la valoración global de la serie) para cada colectivo de dedicación al cine; esto nos permitiría comprobar si la serie presenta los típicos niveles de profundidad que solo los expertos son capaces de analizar y les hace valorar mejor o peor las obras de la gran pantalla.
+
+```{r}
+reviews$valTotal = (reviews[,1]+reviews[,2]+reviews[,3]+reviews[,4])/4
+
+ggplot(reviews, aes(x=dedicacionCine, y=valTotal, fill=dedicacionCine)) + 
+  geom_violin() +
+  labs(title="Valoración global de la serie en función de la dedicación al Cine")
+```
+Este diagrama de violín muestra las valoraciones medias de la serie en función de cada grupo de dedicación. Podemos ver que el único grupo que parece presentar alguna diferencia es el primero, cosa que indicaria que la serie pueda estar dirigida a un grupo menos experto en la materia.
+
+### 4. Modelo multivariante
+
+A continuación, modelizaremos la variable _idioma_ con una distribución multinomial. Para ello trataremos de estimar los parámetros de la multinomial (probabilidades de cada posible resultado que pueda tomar la variable) por sus estimadores de máxima verosimilitud; en el caso de trabajar con una distribución multinnomial, estos estimadores son las frecuencias de aparición que ha tenido cada posible valor. Teniendo la variable _idioma_ 10 posibles valores, llamaremos a estos estimadores de máxima verosimilitud $\hat{p_i}$ para $i\in\{0,1,\cdots,9}$ y los guardaremos en un vector llamado _hatP_. De este modo los podemos calcular con r:
+
+```{r}
+hatP=table(reviews$idioma)/n
+hatP
+```
+De este modo, tenemos las frecuencias de aparición de cada idioma y podemos decir que nuestro modelo de la variable $X$ ( _idioma_ ) es siguiente:
+$$X\sim Multinom(\text{hatP},n)$$
+Este modelo nos permite intentar comprobar (caluclando explícitamente) cual seria la probabilidad de que ocurra un evento en concreto. Puesto que esta variable tenia el objetivo de determinar una característica en concreto del votante (variable de clasificación), seria adecuado que presentara una proporcion equilibrada de valores tomados; por esta razón, calcularemos a modo de ejemplo la probabilidad de que en una muestra de 20 votantes, aparezcan 2 que hayan visto la serie en cada uno de los idiomas posibles. Gracias a las herramientas de _r_ podemos resumir esto en una simple función:
+
+```{r}
+resultado=rep(2,10)
+dmultinom(resultado,prob=hatP)
+```
+Pese a haber construido la variable de modo que las probabilidades iniciales fueran iguales, los parámetros de frecuencia provienen de una muestra aleatoria y no se ajustan del todo a ser equiprobables. Es por esto que aunque querramos buscar el evento más probable de todos (teóricamente, en la práctica el más probable seria que se ajustaran a las frecuencias de la muestra obtenida en las votaciones), que coincidan a nuestro favor no es demasiado probable. Este evento, aunque tenga una probabilidad del orden de $10^{-5}$, es relativamente probable si lo ponemos en el contexto de una muestra de tamaño 20 con 10 posibles valores para cada prueba.
+
+
+### 5. Regresión lineal multivariante
+
+En este apartado intentaremos ajustar un modelo de regresión lineal multivariante para expresar la votación de la cuarta temporada $X_4$ en función de la de los demás variables cuantitativas ($X_i$ voto de la temporada $i$); es decir:
+$$X_4 = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon$$
+
+Para lograr este objetivo debemos encontrar los parámetros de regresión $\beta_i$. Este paso lo podemos hacer fácil mediante una función de _r_ que nos emite los resultados:
+```{r}
+summary(lm(t4~t1+t2+t3,data=datos_numericos))
+```
+
+De este modo, podemos expresar la cuarta variable como:
+$$X_4 = 2.79 - 1.02 X_1 + 0.71 X_2 + 0.55 X_3 + \epsilon$$
+Donde, asumiendo que el error $\epsilon$ se rige por una lei normal de mediana cero, éste presenta un error estandar $\sigma^2=0.2424$. Estos pasos nos permiten ir a calcular, a continuación la función de score del modelo.
+
+La función de *score* del modelo se calcula como la derivada de la función de verosimilitud aplicada sobre los valores obtenidos para los parámetros. En este caso, dado que la cuarta variable debería regirse por una lei normal (del hecho de formar parte de un vector normal multivariante), la función de verosimilitud de esta es la siguiente (siendo $\beta=(\beta_0,\cdots,\beta_3)$:
+
+$$\mathcal{L}(\mathbf{X},\beta,\sigma^2)=\prod_{i=1}^n f_i\left(x_i,\beta, \sigma^2\right) =
+\frac{\exp{\{-\sum_{i=1}^n \frac{x_i-\beta}{2\sigma^2}\}}}{\sigma\sqrt{2\pi}}$$
+De este modo, derivándola en función de los parámetros $\beta, \sigma^2$
+
+### 6. Contraste de dos medias multivariante
+
+En este apartado intentaremos comparar las medias de dos grupos de la población. Para ello utilizaremos el contraste con la función _hotelling.test_ de R y luego lo comprobaremos mediante el test teórico.
+
+Para hacer el caso teórico construiremos
+
+```{r}
+hombres <- reviews %>% subset(sexo=="H") %>% select(1:4)
+mujeres <- reviews %>% subset(sexo=="F") %>% select(1:4)
+medH <- colMeans(hombres)
+medF <- colMeans(mujeres)
+covH <- cov(hombres)
+covF <- cov(mujeres)
+nH <- dim(hombres)[1]
+nF <- dim(mujeres)[1]
+covT <- 1/n*(nH*covH+nF*covF) 
+inve <- solve(covT)
+MahalanobisDist2 <- (medH-medF)%*%inve%*%(medH-medF)
+estadisticoT2 <- nH*nF/(nH+nF)*MahalanobisDist2
+estadisticoF <- (nH+nF-1-4)/(4*(nH+nF-1))*estadisticoT2
+pf(estadisticoF,4,n-4)
+
+```
+Este test no ha salido como debería, ya que prefiero fiarme del resultado del test _hotelling_ mediante _r_ que nos dá el siguiente resultado:
+
+```{r}
+print(hotelling.test(cbind(t1, t2, t3, t4) ~ sexo, data=reviews))
+```
+El resultado del test de hotelling es de p-valor mayor a 0.01 (que asumiremos como nuestro nivel de significancia) y, por lo tanto, no nos permite rechazar la hipótesis nula; es decir, no tenemos prueba de que existan diferencias entre las medias de votaciones de cada sexo. En el contexto del problema podemos interpretar que la serie no gusta más a algun sexo que a otro, cosa que podria descartar que aparezca contenido dirigido a algun sexo en concreto.
+
+
+### Conclusión
+
+Este trabajo presenta pocas conclusiones ya que se fundamenta en datos totalmente simulados. Es por eso que sacaremos metaconclusiones sobre trabajar con simulaciones.
+
+Encontrar datos con estructuras cómodas es bastante complicado de manera natural; por lo que hecha esta práctica con simulaciones, hemos podido comprobar de manera más fiable los tests y jugar con datos que de verdad tengan cierta estructura.
+
+
+
+
+
+
+
+
+
+
+
+
+
